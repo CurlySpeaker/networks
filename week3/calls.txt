@@ -1,0 +1,54 @@
+# Report
+
+1. socket
+
+What it does?
+    Creates network socket (opens server or client side connection) to use in future.
+What does it return?
+    Channel id
+Is blocking?
+    No
+How to handle errors?
+    Check if returned value is -1, than check "errno" to determine the particular error
+
+---
+
+2. accept
+
+What id does?
+    Accepts socket from client, creates new socket and file descriptor for that socket is allocated.
+What does it return?
+    If call is successful returns non-negative file descriptor; if not returns -1 and sets global value errno with
+    corresponding error id(number)
+Is blocking?
+    Yes
+How to handle errors?
+    Check if returned value is -1, than check "errno" to determine the particular error
+
+---
+
+3. select
+
+What id does?
+    Monitors multiple sockets and checks weather one or more file descriptors become available for input/oputput
+    operations
+What does it return?
+    If successful it returns file descriptors, otherwise -1(error)
+Is blocking?
+    Yes
+How to handle errors?
+    Same, check if returned value is -1, than check "errno" to determine the particular error
+
+---
+
+4. bind
+
+What it does?
+    Assings addres to socket
+What does it return?
+    If success returns - otherwise -1
+Is blocking?
+    No
+How to handle errors?
+    Same, check if returned value is -1, than check "errno" to determine the particular error
+
