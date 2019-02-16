@@ -1,8 +1,9 @@
 typedef struct _test_struct{
 
-    char name[32];
+    char name[60];
+    char surname[60];
     unsigned int age;
-    char group[16];
+    char group[60];
 } test_struct_t;
 
 

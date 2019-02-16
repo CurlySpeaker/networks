@@ -52,11 +52,13 @@ void setup_tcp_communication() {
 
 	    /*Prompt the user to enter data*/
 	    /*You will want to change the promt for the second task*/
-	    printf("What is your name : ?\n");
+	    printf("Your name?\n");
 	    scanf("%s", &client_data.name);
-	    printf("How old are you : ?\n");
+	    printf("Your surname?\n");
+	    scanf("%s", &client_data.surname);
+	    printf("Your age?\n");
 	    scanf("%u", &client_data.age);
-	    printf("What is your group : ?\n");
+	    printf("Your group?\n");
 	    scanf("%s", &client_data.group);
 	    
 	    /*Code for task 2 goes here*/

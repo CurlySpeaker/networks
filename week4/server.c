@@ -163,7 +163,7 @@ setup_tcp_server_communication() {
                 }
 
                 result_struct_t result;
-                sprintf(result.result,"Hello, %s. You are %u years old you are from group %s",client_data->name,
+                sprintf(result.result,"You are %s %s. Your age is %u. Your group %s.",client_data->name, client_data->surname,
                         client_data->age, client_data->group);
 
                 /* Server replying back to client now*/
