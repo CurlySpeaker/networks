@@ -14,7 +14,7 @@
 
 
 #define MAX_KNOWN_PEERS 30
-#define MAX_BUF_SIZE 4096
+#define MAX_BUF_SIZE 1024
 #define MAX_THREADS 40
 #define NAME "d.kalinin"
 #define MAX_FILES 30
@@ -96,15 +96,20 @@ int client(){
         return -1;
     }
     printf("Amount of words to be recieved: %d\n", words);
+    char dir[MAX_BUF_SIZE];
+    strcpy(dir, "data/");
+    strcat(dir, filename);
+    FILE *fp = fopen(dir, "w");
 
     //Receiving each word
     char buffer[MAX_BUF_SIZE];
     for(int i=0; i<words; i++){
         if(recv(sockfd, buffer, MAX_BUF_SIZE, 0) == -1)
             printf("Failed to get word \n");
-        else printf("%s\n", buffer);
+        else fprintf(fp, "%s\n", buffer);
     }
     printf("Successfully got %d words\n", words);
+    fclose(fp);
 
     //Close socket
     close(sockfd);
@@ -176,8 +181,8 @@ int parse_peer(char buffer[MAX_BUF_SIZE], char *name, char *ip, int *port, char 
         return -1;
     }
     //Remove []
-    iter[strlen(iter)-1] = 0;
-    iter += 1;
+    //iter[strlen(iter)-1] = 0;
+    //iter += 1;
 
     char *filename;
     int array_len = 0;
@@ -465,9 +470,7 @@ void *synchronizer(void *server_data){
 
                 char my_info[MAX_BUF_SIZE];
                 char *my_files = malloc(MAX_BUF_SIZE);
-                my_files[0] = '[';
                 get_files(my_files);
-                my_files[strlen(my_files)-1] = ']';
                 sprintf(my_info, "%s:%s:%d:%s", NAME, server->ip, server->port, my_files);
 
                 transfered_bytes = send(sockfd, &my_info, MAX_BUF_SIZE, 0);
